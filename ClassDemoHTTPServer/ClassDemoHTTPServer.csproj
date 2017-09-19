@@ -42,9 +42,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AcceptRequest.cs" />
+    <Compile Include="HttpException.cs" />
+    <Compile Include="HttpRequest.cs" />
+    <Compile Include="HttpResponse.cs" />
     <Compile Include="HTTPServer.cs" />
+    <Compile Include="PerformRequest.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SendResponse.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

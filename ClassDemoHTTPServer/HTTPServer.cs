@@ -1,4 +1,6 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
+using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading.Tasks;
@@ -37,7 +39,33 @@ namespace ClassDemoHTTPServer
         {
             // do something
 
+            HttpResponse resp = new HttpResponse();
+            try
+            {
+                AcceptRequest accept = new AcceptRequest(client);
+                HttpRequest req = accept.ReadRequest();
+                Trace.TraceInformation(req.ToString());
+                Trace.Flush();
+
+                PerformRequest perform = new PerformRequest(req);
+                resp = perform.ProcessRequest();
+            }
+            catch (HttpException he)
+            {
+                resp.Code = he.Code;
+                resp.Text = he.Message;
+            }
+            
+
+            SendResponse sendResp = new SendResponse(client, resp);
+            sendResp.Send();
+
+
+
+
             Trace.Flush();
         }
     }
+
+    
 }
